@@ -1,0 +1,22 @@
+{
+	"name": "gaybot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"keywords": [],
+	"author": "MeltyMooncakes and Ariablah",
+	"license": "ISC",
+	"scripts": {
+		"test": "tsc && node dist",
+		"build": "tsc",
+		"start": "node dist"
+	},
+	"devDependencies": {
+		"@types/node": "^22.7.5",
+		"typescript": "^5.6.3"
+	},
+	"dependencies": {
+		"discord.js": "^14.16.3",
+		"yaml": "^2.5.1"
+	}
+}

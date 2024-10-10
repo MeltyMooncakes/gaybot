@@ -1,0 +1,13 @@
+# userID: emojiName (the emoji name is the one you define for the emoji in this config)
+targets:
+  1033474158241255465: cute
+  482099566246625290: cute
+
+emojis:
+  gay_flag: 🏳️‍🌈
+  cute: <:hey_ur_cute:1255564086851141683>
+
+defaultReaction: gay_flag
+
+# please keep above 1 second
+interval: 1e3
