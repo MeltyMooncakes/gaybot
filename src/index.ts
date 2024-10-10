@@ -15,7 +15,7 @@ class DiscordClient extends Client {
 	reactionQueue: QueueEntry[] = [];
 
 	stopped = true;
-	
+
 	constructor(options: ClientOptions) {
 		super(options);
 
@@ -25,13 +25,13 @@ class DiscordClient extends Client {
 
 
 	// queue stuff
-	
+
 	start() {
 		this.queueInterval = setInterval(async () => {
 			if (this.reactionQueue.length === 0) {
 				return;
 			}
-	
+
 			const entry = this.reactionQueue.shift();
 			entry!.message.react(this.config.emojis[entry!.emoji]);
 		}, this.config.interval);
@@ -73,6 +73,17 @@ class DiscordClient extends Client {
 					if (reaction?.me) {
 						reaction.users.remove(this.user?.id);
 					}
+				}
+			})
+			.on(Events.InteractionCreate, async interaction => {
+				if (!interaction.isChatInputCommand()) {
+					return;
+				}
+
+				if (interaction.commandName === "ping") {
+					const n = Date.now();
+					await interaction.reply({ content: "Calculating ping..." });
+					await interaction.editReply({ content: `Pong! My ping is ${(await interaction.fetchReply()).createdTimestamp - n}ms.` });
 				}
 			});
 	}
