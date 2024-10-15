@@ -67,12 +67,12 @@ class DiscordClient extends Client {
 			})
 			.on(Events.MessageUpdate, (_, newMessage) => {
 				if (/(?<=(^|\s|\n))(ga(y|e)|queer|fag(got)*(?=($|\s|\n)))/i.test(newMessage.content || "")) {
-					this.addToQueue(newMessage, this.config.defaultReaction);
-				} else {
-					const reaction = newMessage.reactions.resolve(this.defaultReactionEmoji);
-					if (reaction?.me) {
-						reaction.users.remove(this.user?.id);
-					}
+					return this.addToQueue(newMessage, this.config.defaultReaction);
+				}
+				
+				const reaction = newMessage.reactions.resolve(this.defaultReactionEmoji);
+				if (reaction?.me) {
+					reaction.users.remove(this.user?.id);
 				}
 			})
 			.on(Events.InteractionCreate, async interaction => {
